@@ -48,13 +48,6 @@ char *ask_question(const char *question) {
 
 
 
-static void enter_res(){
-    
-    //每次注册时
-    
-    
-    
-}
 
 
 
@@ -71,11 +64,13 @@ void main_menu(BookArray * headnode, UserArray * usernode){
         printf("\n");
         switch (choice) {
             //注册账户
+            //Registrate an account
             case 1:
                 printf("----REGISTRATION----\n");
                 User user;
                 user.name = ask_question("Please enter the name:");
                 if (name_available(usernode,user.name) == 1) {
+                    //If name named already used,the registration will fail
                     printf("Sorry, named already used, Please chosse another name!\n\n");
                     break;
                 }
@@ -84,15 +79,17 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                 add_user(user, usernode);
                 printf("Registration successfully!\n\n");
                 break;
-            //登陆
+            //Login
                 
             case 2:
                 //如果是管理员那么
+                //Login as librarian
                 printf("----LOGIN-----\n");
                 user_name = ask_question("Please enter your name:\n");
                 password = ask_question("Please enter your password:\n");
                 if(name_available(usernode, user_name) == 1)
                 //通过判断库中是否有这个名字来进入
+                //If the name already existed, it will enter the librarian surface
                 {
                     //管理员
                     if(strcmp(user_name,"librarian")==0 && password_right(usernode, password,user_name) == 1){
