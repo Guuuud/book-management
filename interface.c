@@ -165,7 +165,25 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                 case 2:
                                     break;
                                 case 3:
-                                    printf("测试吃吃吃吃吃吃\n");
+                                    do{
+                                        answer = ask_question("Please choose an option:\n1)Find book by title\n2)Find book by author\n3)Find book by year\n4)Return to previous menu\nOption:");
+                                        choice = atoi(answer);
+                                        switch (choice) {
+                                            case 1:
+                                                case_title = ask_question("Please enter the title:");
+                                                display_books(find_book_by_title(headnode, case_title));
+                                                printf("UUIUIOIOUIUOIUO\n");
+                                                break;
+                                            case 2:
+                                                case_author = ask_question("Please enter the author:");
+                                                break;
+                                            case 3:
+                                                printf("Pleasr enter the year:");
+                                                scanf("%d",&case_year);
+                                                display_books(find_book_by_year(headnode, case_year));
+                                                break;
+                                        }
+                                    }while (choice != 4);
                                     break;
                                 case 4:
                                     printf("NMSL\n");
@@ -185,6 +203,25 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                 
                 break;
             case 3:
+                do{
+                    answer = ask_question("Please choose an option:\n1)Find book by title\n2)Find book by author\n3)Find book by year\n4)Return to previous menu\nOption:");
+                    choice = atoi(answer);
+                    switch (choice) {
+                        case 1:
+                            case_title = ask_question("Please enter the title:");
+                            display_books(find_book_by_title(headnode, case_title));
+                            printf("UUIUIOIOUIUOIUO\n");
+                            break;
+                        case 2:
+                            case_author = ask_question("Please enter the author:");
+                            break;
+                        case 3:
+                            printf("Pleasr enter the year:");
+                            scanf("%d",&case_year);
+                            display_books(find_book_by_year(headnode, case_year));
+                            break;
+                    }
+                }while (choice != 4);
                 break;
             case 4:
                 display_books(headnode);
