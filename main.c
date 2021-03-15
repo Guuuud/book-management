@@ -49,8 +49,13 @@ int main(int argc, const char * argv[]) {
         "nmsl","hh",0,2020,3
     };
     Book a4 = {
-        "h","h",0,243090,2
+        "will","suck",2,78,292
     };
+    
+    Book a5 = {
+        "gione","ds",3,34,5
+    };
+    
     add_book(a1, a);
     add_book(a2, a);
     main_menu(a,u);
