@@ -10,7 +10,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+char * password;
+char * user_name;
 
+char * case_title;
+char * case_author;
+
+unsigned int case_year;
 int ID = 0;
 //这个是复制餐馆的，需要注意修改
 char *ask_question(const char *question) {
