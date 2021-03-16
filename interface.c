@@ -127,7 +127,7 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                         case 1:
                                             case_title = ask_question("Please enter the title:");
                                             display_books(find_book_by_title(headnode, case_title));
-                                            printf("UUIUIOIOUIUOIUO\n");
+                                            //printf("UUIUIOIOUIUOIUO\n");
                                             break;
                                         case 2:
                                             case_author = ask_question("Please enter the author:");
@@ -156,8 +156,8 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                            
                             switch (user_choice) {
                                 case 1:
-                                    borrow_book(usernode, user_name, 1, headnode);
-                                    
+                                    borrow_book(usernode, user_name, 0, headnode);
+                                   
                                     break;
                                 case 2:
                                     break;
@@ -169,7 +169,6 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                             case 1:
                                                 case_title = ask_question("Please enter the title:");
                                                 display_books(find_book_by_title(headnode, case_title));
-                                                printf("UUIUIOIOUIUOIUO\n");
                                                 break;
                                             case 2:
                                                 case_author = ask_question("Please enter the author:");
@@ -207,7 +206,7 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                         case 1:
                             case_title = ask_question("Please enter the title:");
                             display_books(find_book_by_title(headnode, case_title));
-                            printf("UUIUIOIOUIUOIUO\n");
+                            //printf("UUIUIOIOUIUOIUO\n");
                             break;
                         case 2:
                             case_author = ask_question("Please enter the author:");
