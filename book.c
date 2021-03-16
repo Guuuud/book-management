@@ -59,7 +59,11 @@ int load_books(BookArray * array, char * filename){
     
     FILE * fp = fopen(filename, "r");
     Book book;
-    while (fscanf(fp, "%u\t%s\t\t\t\t\t%s\t\t\t\t\t%d\t%d\n",&book.id,book.title,book.authors,&book.year,&book.copies) != EOF) {
+//    while (fscanf(fp, "%u\t%s\t\t\t\t\t%s\t\t\t\t\t%d\t%d\n",&book.id,book.title,book.authors,&book.year,&book.copies) != EOF) {
+//        add_book(book, array);
+//    }
+    while (fscanf(fp, "%u\t\%s\n",&book.id,book.title) != EOF) {
+        
         add_book(book, array);
     }
     fclose(fp);
@@ -77,6 +81,8 @@ int add_book(Book book,BookArray * headnode){
     add_book -> next = headnode -> next;
     headnode -> next = add_book;
     headnode -> length +=1;
+    //将headnode的长度赋给书的id
+    
     return 0;
     
 }
@@ -112,12 +118,21 @@ BookArray * find_book_by_title (BookArray * headNode,const char *title){
         printf("Sorry, there's no books in the library\n");
         return NULL;
     }
-    
     while (strcmp(findnode ->book.title,title) != 0) {
         findnode = findnode->next;
+        if (findnode->next == NULL) {
+            printf("Sorry, there's no books named \"%s\" were found in the library\n",title);
+            return NULL;
+        }
+        if((strcmp(findnode ->book.title,title) == 0)){
+            return findnode;
+        }
     }
-    return findnode;
-    
+    if((strcmp(findnode ->book.title,title) == 0)){
+        return findnode;
+    }
+    printf("是这里出错辣！\n");
+    return NULL;
 }
 
 BookArray * find_book_by_id(BookArray * headNode,int id){
@@ -161,6 +176,7 @@ BookArray * find_book_by_year (BookArray * headNode,unsigned int year){
 
 
 //我的函数
+//重新排列id
 //用于创立节点
 BookArray * createNode(Book bookk){
     
@@ -197,13 +213,18 @@ BookArray * createHead(){
 
 
 void display_books(BookArray * a){
-    printf("ID\tTitle\t\t\t\t\tAuthor\t\t\t\t\tyear\tcopies\n");
     
     //BookArray * pMove = a->next;
+    if (a == NULL) {
+        return;
+    }
+    printf("ID\tTitle\t\t\t\t\tAuthor\t\t\t\t\tyear\tcopies\n");
+    
     BookArray * pMove = a;
     if (pMove ->book.title == NULL) {
         pMove = a->next;
     }
+    
     while (pMove) {
         printf("%d\t",pMove ->book.id);
         printf("%s\t\t\t\t\t",pMove ->book.title);
