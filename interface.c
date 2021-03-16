@@ -15,9 +15,11 @@ char * user_name;
 
 char * case_title;
 char * case_author;
-
 unsigned int case_year;
-int ID = 0;
+
+//一个变量用于remove books
+char * dele_title;
+
 //这个是复制餐馆的，需要注意修改
 char *ask_question(const char *question) {
 
@@ -106,16 +108,27 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                 book.authors = ask_question("Enter the name of the author:");
                                 book.year = atoi(ask_question("Enter the year of the book:"));
                                 book.copies = atoi(ask_question("Enter the copies of the book:"));
-                                book.id = ID;
+                                book.id = headnode->length;
+                                printf("Add Successfully!\n");
                                 add_book(book, headnode);
-                                
-                                ID += 1;
                                 display_books(headnode);
                                 
                             }
                             else if (lib_choice == 2){
-                                Book book;
-                                remove_book(book, headnode);
+                                display_books(headnode);
+                                dele_title = ask_question("Enter the tilte of the book you want to delete:\n");
+                                //找不到
+                                if(find_book_by_title(headnode, dele_title)==NULL){
+                                    printf("找不到！\n");
+                                //找得到
+                                }else{
+                                    Book book = find_book_by_title(headnode, dele_title)->book;
+                                    remove_book(book, headnode);
+                                    Id_arrange(headnode);
+                                }
+                                
+                                
+                                
                             }else if(lib_choice == 4){
                                 display_books(headnode);
                             }else if(lib_choice == 3){

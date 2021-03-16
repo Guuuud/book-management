@@ -177,6 +177,13 @@ BookArray * find_book_by_year (BookArray * headNode,unsigned int year){
 
 //我的函数
 //重新排列id
+void Id_arrange(BookArray * node){
+    BookArray * pMove = node ->next;
+    for (int i = 0; i < node->length; i++) {
+        pMove->book.id = node->length - i - 1;
+        pMove = pMove->next;
+    }
+}
 //用于创立节点
 BookArray * createNode(Book bookk){
     
