@@ -180,13 +180,22 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                         borrow_id = atoi(answer);
                                         borrow_books = find_book_by_id(headnode, borrow_id);
                                         u = borrow_book(u,borrow_books);
-                                        display_borrow(u);
+                                        
                                         
                                     }
                                     
                                     break;
                                 case 2:
-                                    
+                                    display_borrow(u);
+                                        answer = ask_question("Enter the name of the book you want to return");
+                                        borrow_books = find_book_by_title(headnode, answer);
+                                        borrow_books->book.copies += 1;
+                                        for (int i = 0; i < 10- u.borrow; i++) {
+                                            if (strcmp(u.book[i].title,answer)==0) {
+                                                u.book[i].year = 20000;
+                                            }
+                                        }
+                                        
                                     break;
                                 case 3:
                                     do{

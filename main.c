@@ -44,7 +44,7 @@ int main(int argc, const char * argv[]) {
     add_user(nick, u);
 //NMSMNSMNSMNSMNMNSMNSMN
     Book a3 = {
-        "hgg","h",2,2200,2
+        "hgg","h",2,2200,0
     };
     Book a1 = {
         "hgg","h",0,2020,0
