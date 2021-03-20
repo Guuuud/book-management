@@ -137,14 +137,40 @@ BookArray * find_book_by_title (BookArray * headNode,const char *title){
 
 BookArray * find_book_by_id(BookArray * headNode,int id){
     
+//    BookArray * findnode = headNode->next;
+//    for (int i = 0; i < headNode -> length; i++) {
+//        if (findnode ->book.id == id) {
+//            return findnode;
+//        }else{
+//            findnode = findnode->next;
+//        }
+//    }
+//    return NULL;
     BookArray * findnode = headNode->next;
-    for (int i = 0; i < headNode -> length; i++) {
-        if (findnode ->book.id == id) {
+    if (findnode == NULL) {
+        printf("Sorry, there's no books in the library\n");
+        return NULL;
+    }
+    if(findnode->book.id == id){
+        return findnode;
+    }
+    
+    while (findnode->book.id != id) {
+        findnode = findnode->next;
+        if (findnode->next == NULL) {
+            printf("Sorry, there's no books with the id of \"%d\" were found in the library\n",id);
+            return NULL;
+        }
+        if(findnode->book.id == id){
+            printf("找到辣椒");
             return findnode;
-        }else{
-            findnode = findnode->next;
         }
     }
+    if(findnode->book.id == id){
+        printf("找到辣椒2");
+        return findnode;
+    }
+    printf("是这里出错辣！\n");
     return NULL;
 }
 

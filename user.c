@@ -70,21 +70,37 @@ UserArray * user_available(UserArray * u, char * name){
 }
 
 
-void borrow_book(UserArray * u, char * name,int id,BookArray * book){
-    UserArray * pMove = u ->next;
-    while (pMove) {
-        if (strcmp(name, pMove->user.name) == 0) {
-            //pMove->user.book = book;
-            BookArray * borrow_book = find_book_by_id(book, id);
-            pMove ->user.book[10 - pMove ->user.borrow] = borrow_book->book;
-            pMove ->user.borrow -= 1;
-        }else{
-            pMove = pMove->next;
-        }
+User borrow_book(User u,BookArray * book){
+    if (book ->book.copies > 0) {
+        u.book[10-u.borrow] = (book->book);
+        u.book[10-u.borrow].title = book->book.title;
+        printf("能借的书是%d\n",u.borrow);
+        printf("%d",u.book[10-u.borrow].id);
+        printf("%s",u.book[10-u.borrow].title);
+        u.borrow -= 1;
+        book->book.copies-=1;
+        printf("能借的书是%d\n",u.borrow);
+    }else{
+        printf("Sorry, the book were all borrowed\n");
+    }
+    return u;
+}
+
+void display_borrow(User u){
+    printf("ID\tTitle\tAuthor\tYear\n");
+    for (int i = 0; i < 10-u.borrow; i++) {
+        printf("%d\t",u.book[i].id);
+        printf("%s\t",u.book[i].title);
+        printf("%s\t",u.book[i].authors);
+        printf("%d\t",u.book[i].year);
+        
         
     }
 }
 
+void return_book(int id){
+    
+}
 int password_right(UserArray * u,char * password,char * name){
     UserArray * pMove = u->next;
     while (pMove) {

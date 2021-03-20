@@ -19,7 +19,8 @@
 //comment tets
 int main(int argc, const char * argv[]) {
 
-
+    
+    
     User libra = {
         "librarian","123456"
     };
@@ -31,8 +32,11 @@ int main(int argc, const char * argv[]) {
     User nick = {
         "nick","102688"
     };
+    
+    nick.borrow = 10;
 
     BookArray * a = createHead();
+    //load_books(a, "/Users/lee/Desktop/test.txt");
     UserArray * u = createLibra();
     createUser(libra);
     add_user(libra,u);
@@ -40,28 +44,26 @@ int main(int argc, const char * argv[]) {
     add_user(nick, u);
 //NMSMNSMNSMNSMNMNSMNSMN
     Book a3 = {
-        "h","h",0,220,2
+        "hgg","h",2,2200,2
     };
     Book a1 = {
-        "h","h",0,2020,2
+        "hgg","h",0,2020,0
     };
     Book a2 = {
-        "nmsl","hh",0,2020,3
+        "nmsl","hh",1,2020,3
     };
     Book a4 = {
-        "will","suck",2,78,292
+        "will","suck",3,1998,292
     };
     
-    Book a5 = {
-        "gione","ds",3,34,5
-    };
     
     //another test
-    
     add_book(a1, a);
     add_book(a2, a);
+    add_book(a3, a);
+    add_book(a4, a);
     main_menu(a,u);
-    //store_books(a, "/Users/lee/Desktop/book.txt");
+    store_books(a, "/Users/lee/Desktop/book.txt");
 
 
 }

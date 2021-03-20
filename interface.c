@@ -20,6 +20,11 @@ unsigned int case_year;
 //一个变量用于remove books
 char * dele_title;
 
+//一个变量用于借书
+BookArray * borrow_books;
+
+int borrow_id;
+
 //这个是复制餐馆的，需要注意修改
 char *ask_question(const char *question) {
 
@@ -165,14 +170,23 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                         printf("(Logged in as %s)\n",user_name);
                         answer = ask_question("Please choose an option\n1) Borrow a book\n2) Return a book\n3) Search for books\n4) Display all books\n5) Log out\n");
                         user_choice = atoi(answer);
+                        User u = user_available(usernode,user_name)->user;
                         do{
                            
                             switch (user_choice) {
                                 case 1:
-                                    borrow_book(usernode, user_name, 0, headnode);
-                                   
+                                    answer = ask_question("Please enter the id of the book you want to borrow: ");
+                                    if (find_book_by_id(headnode, atoi(answer)) !=NULL) {
+                                        borrow_id = atoi(answer);
+                                        borrow_books = find_book_by_id(headnode, borrow_id);
+                                        u = borrow_book(u,borrow_books);
+                                        display_borrow(u);
+                                        
+                                    }
+                                    
                                     break;
                                 case 2:
+                                    
                                     break;
                                 case 3:
                                     do{

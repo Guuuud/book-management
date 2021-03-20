@@ -37,8 +37,9 @@ int password_right(UserArray * u,char * password,char * name);
 UserArray * user_available(UserArray * u, char * name);
 
 //借书
-void borrow_book(UserArray * u, char * name,int id,BookArray * book);
-
+User borrow_book(User u,BookArray * book);
+//展示借的书
+void display_borrow(User u);
 UserArray * createUser(User user);
 void add_user(User user,UserArray * headnode);
 //const struct User * users_add(struct User a);

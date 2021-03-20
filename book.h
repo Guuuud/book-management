@@ -65,6 +65,8 @@ BookArray * find_book_by_year (BookArray * headNode,unsigned int year);
 
 
 //my functions
+void Id_arrange(BookArray * node);
+
 BookArray * createNode(Book bookk);
 
 BookArray * createHead();
