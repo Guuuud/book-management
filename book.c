@@ -121,7 +121,7 @@ BookArray * find_book_by_title (BookArray * headNode,const char *title){
     while (strcmp(findnode ->book.title,title) != 0) {
         findnode = findnode->next;
         if (findnode->next == NULL) {
-            printf("Sorry, there's no books named \"%s\" were found in the library\n",title);
+            printf("Sorry, there's no books named \"%s\" were found in the library\n\n",title);
             return NULL;
         }
         if((strcmp(findnode ->book.title,title) == 0)){
@@ -162,12 +162,12 @@ BookArray * find_book_by_id(BookArray * headNode,int id){
             return NULL;
         }
         if(findnode->book.id == id){
-            printf("找到辣椒");
+            //printf("找到辣椒");
             return findnode;
         }
     }
     if(findnode->book.id == id){
-        printf("找到辣椒2");
+        //printf("找到辣椒2");
         return findnode;
     }
     printf("是这里出错辣！\n");
@@ -188,13 +188,30 @@ BookArray * find_book_by_year (BookArray * headNode,unsigned int year){
 //    printf("Sorry, there's no books in the library");
 //    return findnode;
     BookArray * findnode = headNode->next;
-    for (int i = 0; i < headNode -> length; i++) {
-        if (findnode ->book.year == year) {
+    if (findnode == NULL) {
+        printf("Sorry, there's no books in the library\n");
+        return NULL;
+    }
+    if(findnode->book.year == year){
+        return findnode;
+    }
+    
+    while (findnode->book.year != year) {
+        findnode = findnode->next;
+        if (findnode->next == NULL) {
+            printf("Sorry, there's no books with the id of \"%d\" were found in the library\n",year);
+            return NULL;
+        }
+        if(findnode->book.year == year){
+            //printf("找到辣椒");
             return findnode;
-        }else{
-            findnode = findnode->next;
         }
     }
+    if(findnode->book.year == year){
+        //printf("找到辣椒2");
+        return findnode;
+    }
+    printf("是这里出错辣！\n");
     return NULL;
 }
 
@@ -251,7 +268,7 @@ void display_books(BookArray * a){
     if (a == NULL) {
         return;
     }
-    printf("ID\tTitle\t\t\t\t\tAuthor\t\t\t\t\tyear\tcopies\n");
+    printf("ID\tTitle\t\t\t\t\tAuthor\t\t\t\tyear\tcopies\n");
     
     BookArray * pMove = a;
     if (pMove ->book.title == NULL) {
@@ -260,8 +277,10 @@ void display_books(BookArray * a){
     
     while (pMove) {
         printf("%d\t",pMove ->book.id);
-        printf("%s\t\t\t\t\t",pMove ->book.title);
-        printf("%s\t\t\t\t\t",pMove ->book.authors);
+        printf("%s",pMove ->book.title);
+        title_length(pMove ->book.title);
+        printf("%s",pMove ->book.authors);
+        author_length(pMove ->book.authors);
         printf("%d\t",pMove ->book.year);
         printf("%d\t\n",pMove ->book.copies);
         pMove = pMove->next;
@@ -280,6 +299,35 @@ int is_number(char * obj){
         }
     }
     return 1;//返回1表示全部是字母
+}
+
+
+void title_length(char * word){
+    if (strlen(word) < 4) {
+        printf("\t\t\t\t\t\t");
+    }else if(strlen(word) < 8){
+        printf("\t\t\t\t\t");
+    }else if(strlen(word) < 12){
+        printf("\t\t\t\t");
+    }else if (strlen(word) < 16){
+        printf("\t\t\t");
+    }else{
+        printf("\t\t");
+    }
+}
+
+void author_length(char * word){
+    if(strlen(word) < 4){
+        printf("\t\t\t\t\t");
+    }else if (strlen(word) < 8){
+        printf("\t\t\t\t");
+    }else if(strlen(word) < 12){
+        printf("\t\t\t");
+    }else if(strlen(word) < 16){
+        printf("\t\t");
+    }else{
+        printf("\t");
+    }
 }
 
 //

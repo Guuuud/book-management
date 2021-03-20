@@ -75,6 +75,10 @@ Book * create_book_added();
 
 BookArray * find_book_by_id (BookArray * headNode,int id);
 
+void title_length(char * word);
+
+void author_length(char * word);
+
 int is_number(char * obj);
 
 

@@ -44,16 +44,20 @@ int main(int argc, const char * argv[]) {
     add_user(nick, u);
 //NMSMNSMNSMNSMNMNSMNSMN
     Book a3 = {
-        "hgg","h",2,2200,0
+        "Irish history","irish",2,2200,1
     };
     Book a1 = {
-        "hgg","h",0,2020,0
+        "shc","shc",0,2020,3
     };
     Book a2 = {
-        "nmsl","hh",1,2020,3
+        "nmsl","nmsl",1,2020,0
     };
     Book a4 = {
-        "will","suck",3,1998,292
+        "Bush story","bush",3,1998,8
+    };
+    
+    Book a5 = {
+        "Gone with the wind","Mitchell Marry",4,1936,3
     };
     
     
@@ -62,6 +66,7 @@ int main(int argc, const char * argv[]) {
     add_book(a2, a);
     add_book(a3, a);
     add_book(a4, a);
+    add_book(a5, a);
     main_menu(a,u);
     store_books(a, "/Users/lee/Desktop/book.txt");
 

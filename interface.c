@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 char * password;
 char * user_name;
 
@@ -100,7 +101,7 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                 {
                     //管理员
                     if(strcmp(user_name,"librarian")==0 && password_right(usernode, password,user_name) == 1){
-                        printf("Login successfully!\n");
+                        printf("Login successfully!\n\n");
                         
                         do{
                             printf("(Logged in as %s)\n",user_name);
@@ -112,7 +113,21 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                 book.title = ask_question("Enter the title of the book:");
                                 book.authors = ask_question("Enter the name of the author:");
                                 book.year = atoi(ask_question("Enter the year of the book:"));
+                                
                                 book.copies = atoi(ask_question("Enter the copies of the book:"));
+                                if(is_number(book.authors) == 0){
+                                    printf("Invalid author name! please try again.\n\n");
+                                    continue;
+                                }
+                                if (book.year == 0) {
+                                    printf("Invalid year! please try again.\n");
+                                    continue;
+                                }
+                                if (book.copies == 0) {
+                                    printf("Invalid copies! please try again.\n");
+                                    continue;
+                                }
+                                
                                 book.id = headnode->length;
                                 printf("Add Successfully!\n");
                                 add_book(book, headnode);
@@ -130,6 +145,7 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                     Book book = find_book_by_title(headnode, dele_title)->book;
                                     remove_book(book, headnode);
                                     Id_arrange(headnode);
+                                    printf("Ok了家人们，删成了\n");
                                 }
                                 
                                 
@@ -164,9 +180,10 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                     }
                     else if(password_right(usernode, password,user_name) != 1){
                         printf("Wrong password! Please try again\n\n");
-                    }//如果不是图书管理员
+                    }
+                    //如果不是图书管理员
                     else if(password_right(usernode, password,user_name) == 1){
-                        printf("Login successfully!\n");
+                        printf("Login successfully!\n\n");
                         printf("(Logged in as %s)\n",user_name);
                         answer = ask_question("Please choose an option\n1) Borrow a book\n2) Return a book\n3) Search for books\n4) Display all books\n5) Log out\n");
                         user_choice = atoi(answer);
@@ -187,9 +204,11 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                     break;
                                 case 2:
                                     display_borrow(u);
-                                        answer = ask_question("Enter the name of the book you want to return");
+                                    
+                                        answer = ask_question("\nEnter the name of the book you want to return:");
                                         borrow_books = find_book_by_title(headnode, answer);
                                         borrow_books->book.copies += 1;
+                                    printf("Return successfully!\n");
                                         for (int i = 0; i < 10- u.borrow; i++) {
                                             if (strcmp(u.book[i].title,answer)==0) {
                                                 u.book[i].year = 20000;
@@ -218,10 +237,11 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                     }while (choice != 4);
                                     break;
                                 case 4:
-                                    printf("NMSL\n");
+                                    //printf("NMSL\n");
                                     display_books(headnode);
                                     break;
                             }
+                            printf("\n(Logged in as %s)\n",user_name);
                             answer = ask_question("Please choose an option\n1) Borrow a book\n2) Return a book\n3) Search for books\n4) Display all books\n5) Log out\n");
                             user_choice = atoi(answer);
                         }while (user_choice != 5);

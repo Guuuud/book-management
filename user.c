@@ -75,31 +75,34 @@ User borrow_book(User u,BookArray * book){
         u.book[10-u.borrow] = (book->book);
         u.book[10-u.borrow].title = book->book.title;
         //printf("能借的书是%d\n",u.borrow);
-        printf("%d",u.book[10-u.borrow].id);
-        printf("%s",u.book[10-u.borrow].title);
+        //printf("%d",u.book[10-u.borrow].id);
+        //printf("%s",u.book[10-u.borrow].title);
         u.borrow -= 1;
         book->book.copies-=1;
         //printf("能借的书是%d\n",u.borrow);
-        printf("borrowed success!\n");
+        printf("\nborrowed success!\n");
        
         display_borrow(u);
     }else{
-        printf("Sorry, the book were all borrowed\n");
+        printf("Sorry, the book \"%s\" were all borrowed.\n",book->book.title);
     }
     return u;
 }
 
 void display_borrow(User u){
     printf("Here is your borrow list\n");
-    printf("ID\tTitle\tAuthor\tYear\n");
+    printf("ID\tTitle\t\t\t\t\tAuthor\t\t\tyear\n");
     for (int i = 0; i < 10-u.borrow; i++) {
         if (u.book[i].year==20000) {
             continue;
         }
         printf("%d\t",u.book[i].id);
-        printf("%s\t",u.book[i].title);
-        printf("%s\t",u.book[i].authors);
-        printf("%d\t",u.book[i].year);
+        
+        printf("%s",u.book[i].title);
+        title_length(u.book[i].title);
+        printf("%s",u.book[i].authors);
+        author_length(u.book[i].title);
+        printf("%d\t\n",u.book[i].year);
         
         
     }
