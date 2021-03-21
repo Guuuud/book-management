@@ -81,7 +81,7 @@ void author_length(char * word);
 
 int is_number(char * obj);
 
-
+char all_upper(char * obj);
 
 void display_books(BookArray * a);
 

@@ -65,6 +65,7 @@ void main_menu(BookArray * headnode, UserArray * usernode){
     int choice = 5;
     int lib_choice = 5;
     int user_choice = 5;
+    int search_choice = 4;
     do{
         char * answer = ask_question("Please choose an option\n1) Register an account\n2) Login\n3) Search for books\n4) Display all books\n5) Quit\n");
         choice = atoi(answer);
@@ -171,6 +172,8 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                             scanf("%d",&case_year);
                                             display_books(find_book_by_year(headnode, case_year));
                                             break;
+                                        default:
+                                            printf("sorry, that doesn't seem to be an option, please choose between 1 - 5\n");
                                     }
                                 }while (choice != 4);
                             }
@@ -196,8 +199,11 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                     if (find_book_by_id(headnode, atoi(answer)) !=NULL) {
                                         borrow_id = atoi(answer);
                                         borrow_books = find_book_by_id(headnode, borrow_id);
-                                        u = borrow_book(u,borrow_books);
-                                        
+                                        if (if_repeat(u, borrow_books->book.title)==0) {
+                                            u = borrow_book(u,borrow_books);
+                                        }else{
+                                            printf("Sorry, you've already borrow this book\n");
+                                        }
                                         
                                     }
                                     
@@ -207,13 +213,19 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                     
                                         answer = ask_question("\nEnter the name of the book you want to return:");
                                         borrow_books = find_book_by_title(headnode, answer);
+                                    if (borrow_books != NULL && if_repeat(u, borrow_books->book.title)==1) {
                                         borrow_books->book.copies += 1;
                                     printf("Return successfully!\n");
                                         for (int i = 0; i < 10- u.borrow; i++) {
                                             if (strcmp(u.book[i].title,answer)==0) {
                                                 u.book[i].year = 20000;
+                                                u.book[i].title = "fudiouifauhfd";
                                             }
                                         }
+                                    }else{
+                                        printf("There is no such book called \"%s\" in you borrow list.\n",answer);
+                                    }
+                                        
                                         
                                     break;
                                 case 3:
@@ -240,6 +252,8 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                     //printf("NMSL\n");
                                     display_books(headnode);
                                     break;
+                                default:
+                                    printf("sorry, that doesn't seem to be an option, please choose between 1 - 5\n");
                             }
                             printf("\n(Logged in as %s)\n",user_name);
                             answer = ask_question("Please choose an option\n1) Borrow a book\n2) Return a book\n3) Search for books\n4) Display all books\n5) Log out\n");
@@ -255,10 +269,11 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                 
                 break;
             case 3:
+                answer = ask_question("Please choose an option:\n1)Find book by title\n2)Find book by author\n3)Find book by year\n4)Return to previous menu\nOption:");
+                search_choice = atoi(answer);
                 do{
-                    answer = ask_question("Please choose an option:\n1)Find book by title\n2)Find book by author\n3)Find book by year\n4)Return to previous menu\nOption:");
-                    choice = atoi(answer);
-                    switch (choice) {
+                    
+                    switch (search_choice) {
                         case 1:
                             case_title = ask_question("Please enter the title:");
                             display_books(find_book_by_title(headnode, case_title));
@@ -270,10 +285,15 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                         case 3:
                             printf("Pleasr enter the year:");
                             scanf("%d",&case_year);
+                            printf("\n");
                             display_books(find_book_by_year(headnode, case_year));
+                            answer = ask_question("Please choose an option:\n1)Find book by title\n2)Find book by author\n3)Find book by year\n4)Return to previous menu\nOption:");
+                            search_choice = atoi(answer);
+                            break;
+                        case 4:
                             break;
                     }
-                }while (choice != 4);
+                }while (search_choice != 4);
                 break;
             case 4:
                 display_books(headnode);
@@ -282,7 +302,7 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                 printf("goodbye\n");
                 break;
             default:
-                printf("sorry, that doesn't seem to be an option, please follow the instrucstions\n");
+                printf("sorry, that doesn't seem to be an option, please choose between 1 - 5\n");
                
         }
     }while (choice != 5 );

@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-
+char upper;
 
 char *as_question(const char *question) {
 
@@ -112,6 +112,8 @@ int remove_book(Book book,BookArray * headnode){
 }
 
 BookArray * find_book_by_title (BookArray * headNode,const char *title){
+    
+    //upper = all_upper(title);
     
     BookArray * findnode = headNode->next;
     if (findnode == NULL) {
@@ -268,6 +270,8 @@ void display_books(BookArray * a){
     if (a == NULL) {
         return;
     }
+    printf("LIBRARY LIST ^^ LIBRARY LIST ^^ LIBRARY LIST ^^ \n");
+    printf("-------------------------------------------------------------\n");
     printf("ID\tTitle\t\t\t\t\tAuthor\t\t\t\tyear\tcopies\n");
     
     BookArray * pMove = a;
@@ -285,6 +289,7 @@ void display_books(BookArray * a){
         printf("%d\t\n",pMove ->book.copies);
         pMove = pMove->next;
     }
+    printf("-------------------------------------------------------------\n");
 }
 
 
@@ -301,6 +306,18 @@ int is_number(char * obj){
     return 1;//返回1表示全部是字母
 }
 
+//char all_upper(char obj){
+//    int i = 0;
+//    while (obj[i]) {
+//        if ((obj[i] >= 'a' && obj[i] <= 'z')) {
+//            obj[i] += 26;
+//            i++;
+//        }else{
+//            i++;
+//        }
+//    }
+//    return obj;
+//}
 
 void title_length(char * word){
     if (strlen(word) < 4) {

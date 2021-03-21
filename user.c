@@ -89,6 +89,17 @@ User borrow_book(User u,BookArray * book){
     return u;
 }
 
+int if_repeat(User u,char * tiltle){
+    for (int i = 0; i < 10-u.borrow; i++) {
+        if (strcmp(u.book[i].title, tiltle) == 0) {
+            
+            return 1;
+        }
+    }
+    return 0;
+}
+
+
 void display_borrow(User u){
     printf("Here is your borrow list\n");
     printf("ID\tTitle\t\t\t\t\tAuthor\t\t\tyear\n");
@@ -108,9 +119,9 @@ void display_borrow(User u){
     }
 }
 
-void return_book(int id){
-    
-}
+//int return_book(char * title){
+//    
+//}
 int password_right(UserArray * u,char * password,char * name){
     UserArray * pMove = u->next;
     while (pMove) {

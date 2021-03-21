@@ -45,4 +45,6 @@ void add_user(User user,UserArray * headnode);
 //const struct User * users_add(struct User a);
 //void exist_or_not();
 
+int if_repeat(User u,char * tiltle);
+
 struct User users_add(struct User a);
