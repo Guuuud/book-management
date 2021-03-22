@@ -137,6 +137,34 @@ BookArray * find_book_by_title (BookArray * headNode,const char *title){
     return NULL;
 }
 
+
+BookArray * find_book_by_author (BookArray * headNode,const char *title){
+    
+    BookArray * Author_node = createHead();
+    if (headNode == NULL) {
+        printf("Sorry, there's no books in the library\n");
+        return NULL;
+    }
+    
+    BookArray * findnode = headNode->next;
+    
+    while (strcmp(findnode ->book.title,title) != 0) {
+        findnode = findnode->next;
+        if (findnode->next == NULL) {
+            printf("Sorry, there's no books with the author named \"%s\" were found in the library\n\n",title);
+            return NULL;
+        }
+        if((strcmp(findnode ->book.title,title) == 0)){
+            Author_node -> next = findnode;
+            
+        }
+    }
+    
+    return findnode;
+    
+    
+}
+
 BookArray * find_book_by_id(BookArray * headNode,int id){
     
 //    BookArray * findnode = headNode->next;
@@ -289,6 +317,37 @@ void display_books(BookArray * a){
         printf("%d\t\n",pMove ->book.copies);
         pMove = pMove->next;
     }
+    printf("-------------------------------------------------------------\n");
+}
+
+void display_books_by_title(BookArray * pMove){
+    
+    //BookArray * pMove = a->next;
+//    if (a == NULL) {
+//        return;
+//    }
+    if (pMove == NULL) {
+        return;
+    }
+    printf("LIBRARY LIST ^^ LIBRARY LIST ^^ LIBRARY LIST ^^ \n");
+    printf("-------------------------------------------------------------\n");
+    printf("ID\tTitle\t\t\t\t\tAuthor\t\t\t\tyear\tcopies\n");
+    
+//    BookArray * pMove = a;
+//    if (pMove ->book.title == NULL) {
+//        pMove = a->next;
+//    }
+    
+//    while (pMove) {
+        printf("%d\t",pMove ->book.id);
+        printf("%s",pMove ->book.title);
+        title_length(pMove ->book.title);
+        printf("%s",pMove ->book.authors);
+        author_length(pMove ->book.authors);
+        printf("%d\t",pMove ->book.year);
+        printf("%d\t\n",pMove ->book.copies);
+//        pMove = pMove->next;
+//    }
     printf("-------------------------------------------------------------\n");
 }
 

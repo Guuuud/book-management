@@ -55,7 +55,7 @@ BookArray * find_book_by_title (BookArray * headNode,const char *title);
 //returns a BookArray structure, where the field "array" is a newly allocated array of books, or null if no book with the
 //provided title can be found. The length of the array is also recorded in the returned structure, with 0 in case
 //array is the null pointer.
-BookArray find_book_by_author (const char *author);
+BookArray * find_book_by_author (BookArray * headNode,const char *author);
 
 //finds books published in the given year.
 //returns a BookArray structure, where the field "array" is a newly allocated array of books, or null if no book with the
@@ -84,6 +84,8 @@ int is_number(char * obj);
 char all_upper(char * obj);
 
 void display_books(BookArray * a);
+
+void display_books_by_title(BookArray * pMove);
 
 Book * create();
 #endif
