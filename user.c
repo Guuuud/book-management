@@ -114,9 +114,9 @@ void display_borrow(User u){
         printf("%s",u.book[i].authors);
         author_length(u.book[i].title);
         printf("%d\t\n",u.book[i].year);
-        
-        
+        //printf("LLLLDLDLDLDLDLLD");
     }
+    printf("%d]]]]]]",u.borrow);
 }
 
 //int return_book(char * title){

@@ -210,6 +210,7 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                         borrow_id = atoi(answer);
                                         borrow_books = find_book_by_id(headnode, borrow_id);
                                         if (if_repeat(u, borrow_books->book.title)==0) {
+                                            //bug的错误在于你这个函数返回的u是一个全新的u，而不是nick
                                             u = borrow_book(u,borrow_books);
                                         }else{
                                             printf("Sorry, you've already borrow this book\n");
