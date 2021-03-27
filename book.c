@@ -47,7 +47,7 @@ int store_books(BookArray * array,char * filename){
     }
     BookArray * book = array -> next;
     while (book) {
-        fprintf(fp, "%u\t%s\t\t\t\t\t%s\t\t\t\t\t%d\t%d\n",book ->book.id,book ->book.title,book ->book.authors,book ->book.year,book->book.copies);
+        fprintf(fp, "%u\t%s\t%s\t%d\t%d\n",book ->book.id,book ->book.title,book ->book.authors,book ->book.year,book->book.copies);
         book = book -> next;
     }
     fclose(fp);
@@ -59,13 +59,47 @@ int load_books(BookArray * array, char * filename){
     
     FILE * fp = fopen(filename, "r");
     Book book;
-//    while (fscanf(fp, "%u\t%s\t\t\t\t\t%s\t\t\t\t\t%d\t%d\n",&book.id,book.title,book.authors,&book.year,&book.copies) != EOF) {
+//    book.title = (char*)malloc(sizeof(char));
+//    book.authors = (char*)malloc(sizeof(char));
+//    int i = 0;
+//    while (i < 4) {
+//        //printf("KKKKKK");
+//        i++;
+//        fscanf(fp, "%u\t%s\t%s\t%d\t%d\n",&book.id,book.title,book.authors,&book.year,&book.copies);
+//        book.title = (char*)malloc(sizeof(char));
+//        book.authors = (char*)malloc(sizeof(char));
 //        add_book(book, array);
 //    }
-    while (fscanf(fp, "%u\t\%s\n",&book.id,book.title) != EOF) {
+//
+    BookArray * hode = array;
+    
+    while (!feof(fp)) {
+        BookArray * node = malloc(sizeof(BookArray));
         
-        add_book(book, array);
+        
+        node->book.title = (char*)malloc(40* sizeof(char));
+        node->book.authors = (char*)malloc(40* sizeof(char));
+        
+        memset(node->book.title, 0, 40* sizeof(char));
+        memset(node->book.authors, 0, 40* sizeof(char));
+        
+//        fscanf(fp,"%s %s %d %d %u", book.title,book.authors,&book.id,&book.year,&book.copies);
+        
+        fread(node->book.title, 40 * sizeof(char), 1, fp);
+        fread(node->book.authors, 40 * sizeof(char), 1, fp);
+        fread(&node->book.id, sizeof(int), 1, fp);
+        fread(&node->book.year, sizeof(int), 1, fp);
+        fread(&node->book.copies, sizeof(int), 1, fp);
+        
+        node -> next = array ->next;
+        node = array -> next;
+        printf("KKKLKLKLKL\n");
+        //printf("%s",node->book.title);
+        
+        //node -> next = NULL;
+        
     }
+    
     fclose(fp);
     /*
      

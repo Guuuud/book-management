@@ -36,7 +36,7 @@ int main(int argc, const char * argv[]) {
     nick.borrow = 10;
 
     BookArray * a = createHead();
-    //load_books(a, "/Users/lee/Desktop/test.txt");
+    //load_books(a, "/Users/lee/Desktop/book.txt");
     UserArray * u = createLibra();
     createUser(libra);
     add_user(libra,u);
@@ -61,7 +61,6 @@ int main(int argc, const char * argv[]) {
     };
     
     
-    //another test
     add_book(a1, a);
     add_book(a2, a);
     add_book(a3, a);
