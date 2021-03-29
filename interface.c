@@ -40,14 +40,14 @@ char *ask_question(const char *question) {
     int iteration = 0;
     do {
         answer = realloc(answer, size_step + iteration*size_step);
-        next_chunk = answer + strlen(answer); //answer may have moved.
+        next_chunk = answer + strlen(answer);
         fgets(next_chunk, size_step, stdin);
 
-        next_chunk = answer + strlen(answer); //take the new read into account
+        next_chunk = answer + strlen(answer);
         ++iteration;
     } while (* (next_chunk-1) != '\n');
 
-    *(next_chunk-1) = 0; //truncate the string eliminating the new line.
+    *(next_chunk-1) = 0; 
 
     return answer;
 }
@@ -140,13 +140,13 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                 dele_title = ask_question("Enter the tilte of the book you want to delete:\n");
                                 //找不到
                                 if(find_book_by_title(headnode, dele_title)==NULL){
-                                    printf("找不到！\n");
+                                    printf("Cannot be found！\n");
                                 //找得到
                                 }else{
                                     Book book = find_book_by_title(headnode, dele_title)->book;
                                     remove_book(book, headnode);
                                     Id_arrange(headnode);
-                                    printf("Ok了家人们，删成了\n");
+                                    printf("Delete successful\n");
                                 }
                                 
                                 
@@ -162,11 +162,14 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                     switch (search_choice) {
                                         case 1:
                                             case_title = ask_question("Please enter the title:");
-                                            display_books(find_book_by_title(headnode, case_title));
+                                            //display_books(find_book_by_title(headnode, case_title));
+                                            display_books_by_title(find_book_by_title(headnode, case_title));
 
                                             break;
                                         case 2:
                                             case_author = ask_question("Please enter the author:");
+                                            //display_books(find_book_by_author(headnode, case_author));
+                                            display_books_by_author( case_author,find_book_by_author(headnode, case_author));
                                             break;
                                         case 3:
                                             printf("Pleasr enter the year:");
@@ -180,7 +183,8 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                             break;
                                             
                                     }
-                                    printf("|||||||||||\n");
+                                    printf("press enter to continue\n");
+                                    //printf("|||||||||||\n");
                                     getchar();
                                     answer = ask_question("Please choose an option:\n1)Find book by title\n2)Find book by author\n3)Find book by year\n4)Return to previous menu\nOption:");
                                     search_choice = atoi(answer);
@@ -221,6 +225,8 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                     
                                     break;
                                 case 2:
+                                    
+                                    
                                     display_borrow(u);
                                     
                                         answer = ask_question("\nEnter the name of the book you want to return:");
@@ -232,6 +238,7 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                             if (strcmp(u.book[i].title,answer)==0) {
                                                 u.book[i].year = 20000;
                                                 u.book[i].title = "fudiouifauhfd";
+                                                user_available(usernode,user_name)->user = u;
                                             }
                                         }
                                     }else{
@@ -248,11 +255,14 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                         switch (search_choice) {
                                             case 1:
                                                 case_title = ask_question("Please enter the title:");
-                                                display_books(find_book_by_title(headnode, case_title));
+                                                //display_books(find_book_by_title(headnode, case_title));
+                                                display_books_by_title(find_book_by_title(headnode, case_title));
 
                                                 break;
                                             case 2:
                                                 case_author = ask_question("Please enter the author:");
+                                                //display_books(find_book_by_author(headnode, case_author));
+                                                display_books_by_author( case_author,find_book_by_author(headnode, case_author));
                                                 break;
                                             case 3:
                                                 printf("Pleasr enter the year:");
@@ -264,8 +274,10 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                                                 break;
                                             case 4:
                                                 break;
+                                            
                                                 
                                         }
+                                        printf("press enter to continue\n");
                                         //printf("|||||||||||\n");
                                         getchar();
                                         answer = ask_question("Please choose an option:\n1)Find book by title\n2)Find book by author\n3)Find book by year\n4)Return to previous menu\nOption:");
@@ -294,7 +306,6 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                 
                 break;
             case 3:
-//                printf("在这里！！！");
                 answer = ask_question("Please choose an option:\n1)Find book by title\n2)Find book by author\n3)Find book by year\n4)Return to previous menu\nOption:");
                 search_choice = atoi(answer);
                 do{
@@ -302,11 +313,14 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                     switch (search_choice) {
                         case 1:
                             case_title = ask_question("Please enter the title:");
+                            //display_books(find_book_by_title(headnode, case_title));
                             display_books_by_title(find_book_by_title(headnode, case_title));
 
                             break;
                         case 2:
                             case_author = ask_question("Please enter the author:");
+                            //display_books(find_book_by_author(headnode, case_author));
+                            display_books_by_author( case_author,find_book_by_author(headnode, case_author));
                             break;
                         case 3:
                             printf("Pleasr enter the year:");
@@ -318,8 +332,10 @@ void main_menu(BookArray * headnode, UserArray * usernode){
                             break;
                         case 4:
                             break;
+                        
                             
                     }
+                    printf("press enter to continue\n");
                     //printf("|||||||||||\n");
                     getchar();
                     answer = ask_question("Please choose an option:\n1)Find book by title\n2)Find book by author\n3)Find book by year\n4)Return to previous menu\nOption:");

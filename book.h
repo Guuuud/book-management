@@ -87,6 +87,8 @@ void display_books(BookArray * a);
 
 void display_books_by_title(BookArray * pMove);
 
+void display_books_by_author(char * author,BookArray * pMove);
+
 Book * create();
 #endif
 

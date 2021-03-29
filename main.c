@@ -50,7 +50,7 @@ int main(int argc, const char * argv[]) {
         "shc","shc",0,2020,3
     };
     Book a2 = {
-        "nmsl","nmsl",1,2020,0
+        "RNG","shc",1,2020,0
     };
     Book a4 = {
         "Bush story","bush",3,1998,8
@@ -67,7 +67,7 @@ int main(int argc, const char * argv[]) {
     add_book(a4, a);
     add_book(a5, a);
     main_menu(a,u);
-    store_books(a, "/Users/lee/Desktop/book.txt");
+    //store_books(a, "/Users/lee/Desktop/book.txt");
 
 
 }

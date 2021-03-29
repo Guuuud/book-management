@@ -147,8 +147,6 @@ int remove_book(Book book,BookArray * headnode){
 
 BookArray * find_book_by_title (BookArray * headNode,const char *title){
     
-    //upper = all_upper(title);
-    
     BookArray * findnode = headNode->next;
     if (findnode == NULL) {
         printf("Sorry, there's no books in the library\n");
@@ -174,42 +172,32 @@ BookArray * find_book_by_title (BookArray * headNode,const char *title){
 
 BookArray * find_book_by_author (BookArray * headNode,const char *title){
     
-    BookArray * Author_node = createHead();
-    if (headNode == NULL) {
+    BookArray * findnode = headNode->next;
+    if (findnode == NULL) {
         printf("Sorry, there's no books in the library\n");
         return NULL;
     }
-    
-    BookArray * findnode = headNode->next;
-    
-    while (strcmp(findnode ->book.title,title) != 0) {
+    while (strcmp(findnode ->book.authors,title) != 0) {
         findnode = findnode->next;
         if (findnode->next == NULL) {
-            printf("Sorry, there's no books with the author named \"%s\" were found in the library\n\n",title);
+            printf("Sorry, there's no auhtor named \"%s\" were found in the library\n\n",title);
             return NULL;
         }
-        if((strcmp(findnode ->book.title,title) == 0)){
-            Author_node -> next = findnode;
-            
+        if((strcmp(findnode ->book.authors,title) == 0)){
+            return findnode;
         }
     }
-    
-    return findnode;
+    if((strcmp(findnode ->book.authors,title) == 0)){
+        return findnode;
+    }
+    printf("是这里出错辣！\n");
+    return NULL;
     
     
 }
 
 BookArray * find_book_by_id(BookArray * headNode,int id){
-    
-//    BookArray * findnode = headNode->next;
-//    for (int i = 0; i < headNode -> length; i++) {
-//        if (findnode ->book.id == id) {
-//            return findnode;
-//        }else{
-//            findnode = findnode->next;
-//        }
-//    }
-//    return NULL;
+
     BookArray * findnode = headNode->next;
     if (findnode == NULL) {
         printf("Sorry, there's no books in the library\n");
@@ -240,17 +228,6 @@ BookArray * find_book_by_id(BookArray * headNode,int id){
 
 BookArray * find_book_by_year (BookArray * headNode,unsigned int year){
     
-//    BookArray * findnode = headNode->next;
-//    if (findnode == NULL) {
-//        printf("Sorry, there's no books in the library\n");
-//        return NULL;
-//    }
-//
-//    while (findnode ->book.year != year && findnode != NULL) {
-//        findnode = findnode->next;
-//    }
-//    printf("Sorry, there's no books in the library");
-//    return findnode;
     BookArray * findnode = headNode->next;
     if (findnode == NULL) {
         printf("Sorry, there's no books in the library\n");
@@ -382,6 +359,32 @@ void display_books_by_title(BookArray * pMove){
         printf("%d\t\n",pMove ->book.copies);
 //        pMove = pMove->next;
 //    }
+    printf("-------------------------------------------------------------\n");
+}
+
+void display_books_by_author(char * author,BookArray * pMove){
+    
+
+    if (pMove == NULL) {
+        return;
+    }
+    printf("LIBRARY LIST ^^ LIBRARY LIST ^^ LIBRARY LIST ^^ \n");
+    printf("-------------------------------------------------------------\n");
+    printf("ID\tTitle\t\t\t\t\tAuthor\t\t\t\tyear\tcopies\n");
+
+    while (pMove) {
+        if (strcmp(author, pMove->book.authors) == 0) {
+            printf("%d\t",pMove ->book.id);
+            printf("%s",pMove ->book.title);
+            title_length(pMove ->book.title);
+            printf("%s",pMove ->book.authors);
+            author_length(pMove ->book.authors);
+            printf("%d\t",pMove ->book.year);
+            printf("%d\t\n",pMove ->book.copies);
+        }
+       pMove = pMove->next;
+        //printf("sdds\n");
+    }
     printf("-------------------------------------------------------------\n");
 }
 
